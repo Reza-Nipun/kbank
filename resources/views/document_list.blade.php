@@ -1,0 +1,62 @@
+@extends('layouts.app')
+
+@section('content')
+    <div class="">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        {{ __('Document List') }}
+
+                        <div class="btn-toolbar float-right">
+                            <a class="btn btn-success mr-1" href="{{ url('/add_document') }}" title="Assign Task">
+                                <i class="fa fa-plus"></i> Document
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">Subject</th>
+                                    <th class="text-center">Category</th>
+                                    <th class="text-center">Applicability</th>
+                                    <th class="text-center">Document Type</th>
+                                    <th class="text-center">Reference No</th>
+                                    <th class="text-center">Version</th>
+                                    <th class="text-center">Remakrs</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($documents as $k => $d)
+                                        <tr>
+                                            <td class="text-center">{{ $k+1 }}</td>
+                                            <td class="text-center">{{ $d->subject }}</td>
+                                            <td class="text-center">{{ $d->category_name }}</td>
+                                            <td class="text-center">{{ $d->applicability_name }}</td>
+                                            <td class="text-center">{{ $d->document_type_name }}</td>
+                                            <td class="text-center">{{ $d->reference_code }}</td>
+                                            <td class="text-center">{{ $d->max_version }}</td>
+                                            <td class="text-center">{{ $d->remarks }}</td>
+                                            <td class="text-center">
+                                                <a class="btn btn-sm btn-primary" href="{{ url('/view_document/'.$d->max_id) }}" target="_blank" title="VIEW">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                                <a class="btn btn-sm btn-warning" href="{{ url('/document_detail_list/'.$d->reference_code) }}" target="_blank" title="DETAIL LIST">
+                                                    <i class="fa fa-list"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+@endsection
