@@ -49,4 +49,6 @@ Route::get('/view_document/{id}', 'DocumentController@viewDocument')->name('view
 Route::get('/add_document', 'DocumentController@create')->name('add_document');
 Route::post('/save_document', 'DocumentController@store')->name('save_document');
 Route::post('/get_document_info_by_id', 'DocumentController@getDocumentInfoById')->name('get_document_info_by_id');
-Route::get('/document_detail_list/{reference_code}', 'DocumentController@getDocumentDetailList')->name('document_detail_list');
+Route::get('/document_detail_list/{reference_code}/{category_id}', 'DocumentController@getDocumentDetailList')->name('document_detail_list');
+Route::get('/delete_document_by_id/{id}', 'DocumentController@deleteDocumentById')->name('delete_document_by_id');
+Route::post('/get_filtered_documents', 'DocumentController@getFilteredDocuments')->name('get_filtered_documents');

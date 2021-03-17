@@ -72,7 +72,7 @@
                 var myState = {
                     pdf: null,
                     currentPage: 1,
-                    zoom: 1.4
+                    zoom: 1.1
                 }
 
                 pdfjsLib.getDocument(data).then((pdf) => {

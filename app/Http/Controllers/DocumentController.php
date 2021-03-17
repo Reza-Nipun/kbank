@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DocumentType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 use App\Applicability;
 use App\Document;
@@ -29,10 +30,10 @@ class DocumentController extends Controller
         $new_requests = User::where('status', 2)->get();
         $new_requests_count = $new_requests->count();
 
-//        $documents = DB::table('documents')
-//                    ->select('*', DB::raw('MAX(version) as max_version'))
-//                    ->groupBy('subject', 'reference_code', 'category_id', 'applicability_id', 'document_type_id')
-//                    ->get();
+        $categories = Category::where('status', 1)->get();
+        $applicabilities = Applicability::where('status', 1)->get();
+        $document_types = DocumentType::where('status', 1)->get();
+        $reference_nos = Document::groupBy('reference_code')->get();
 
         $documents = DB::select("SELECT t1.*, t2.category_name, t3.applicability_name, t4.document_type_name 
                     FROM 
@@ -52,7 +53,82 @@ class DocumentController extends Controller
                     document_types AS t4
                     ON t1.document_type_id=t4.id");
 
-        return view('document_list', compact('new_requests_count', 'documents'));
+        return view('document_list', compact('new_requests_count', 'documents', 'categories', 'applicabilities', 'document_types', 'reference_nos'));
+    }
+
+    public  function getFilteredDocuments(Request $request){
+        $subject = $request->subject;
+        $category = $request->category;
+        $applicability = $request->applicability;
+        $document_type = $request->document_type;
+        $reference_code = $request->reference_code;
+
+        $where = "";
+
+        if($subject <> ""){
+            $where .= " AND subject LIKE '%$subject%'";
+        }
+
+        if($category <> ""){
+            $where .= " AND category_id = '$category'";
+        }
+
+        if($applicability <> ""){
+            $where .= " AND applicability_id = '$applicability'";
+        }
+
+        if($document_type <> ""){
+            $where .= " AND document_type_id = '$document_type'";
+        }
+
+        if($reference_code <> ""){
+            $where .= " AND reference_code = '$reference_code'";
+        }
+
+        $documents = DB::select("SELECT t1.*, t2.category_name, t3.applicability_name, t4.document_type_name 
+                    FROM 
+                    (SELECT *, MAX(id) AS max_id, MAX(version) as max_version 
+                    FROM documents 
+                    WHERE 1 $where
+                    GROUP BY reference_code, category_id, applicability_id, document_type_id) AS t1
+                    
+                    LEFT JOIN
+                    categories AS t2
+                    ON t1.category_id=t2.id
+                    
+                    LEFT JOIN
+                    applicabilities AS t3
+                    ON t1.applicability_id=t3.id
+                    
+                    LEFT JOIN
+                    document_types AS t4
+                    ON t1.document_type_id=t4.id");
+
+        $new_row = '';
+
+        foreach ($documents AS $k => $d){
+            $new_row .= '<tr>';
+            $new_row .= '<td class="text-center">'.($k+1).'</td>';
+            $new_row .= '<td class="text-center">'.$d->subject.'</td>';
+            $new_row .= '<td class="text-center">'.$d->category_name.'</td>';
+            $new_row .= '<td class="text-center">'.$d->applicability_name.'</td>';
+            $new_row .= '<td class="text-center">'.$d->document_type_name.'</td>';
+            $new_row .= '<td class="text-center">'.$d->reference_code.'</td>';
+            $new_row .= '<td class="text-center">'.$d->max_version.'</td>';
+            $new_row .= '<td class="text-center">'.$d->remarks.'</td>';
+            $new_row .= '<td class="text-center">
+                            <a class="btn btn-sm btn-primary" href="'.url('/view_document/'.$d->max_id).'" target="_blank" title="VIEW">
+                                <i class="fa fa-eye"></i>
+                            </a>
+                            <a class="btn btn-sm btn-warning" href="'.url('/document_detail_list/'.$d->reference_code.'/'.$d->category_id).'" title="DETAIL LIST">
+                                <i class="fa fa-list"></i>
+                            </a>
+                        </td>';
+            $new_row .= '</tr>';
+        }
+
+        return $new_row;
+
     }
 
     public function viewDocument($id){
@@ -71,16 +147,19 @@ class DocumentController extends Controller
         $document_info = Document::find($document_id);
         $file_name = $document_info->document_url;
 
-        echo asset('storage/uploads/'.$file_name);
+        echo asset('storage/app/public/uploads/'.$file_name);
 
     }
 
-    public function getDocumentDetailList($reference_code){
+    public function getDocumentDetailList($reference_code, $category_id){
+        $new_requests = User::where('status', 2)->get();
+        $new_requests_count = $new_requests->count();
+
         $documents = DB::select("SELECT t1.*, t2.category_name, t3.applicability_name, t4.document_type_name 
                     FROM 
                     (SELECT *
                     FROM documents 
-                    WHERE reference_code='$reference_code') AS t1
+                    WHERE reference_code='$reference_code' AND category_id='$category_id') AS t1
                     
                     LEFT JOIN
                     categories AS t2
@@ -94,7 +173,18 @@ class DocumentController extends Controller
                     document_types AS t4
                     ON t1.document_type_id=t4.id");
 
-        return view('document_detail_list', compact('documents'));
+        return view('document_detail_list', compact('documents', 'new_requests_count'));
+    }
+
+    public function deleteDocumentById($id){
+        $document_info = Document::find($id);
+        $file_name = $document_info->document_url;
+
+        Storage::delete('public/uploads/' . $file_name);
+
+        $document_info->delete();
+
+        return redirect()->back();
     }
 
     /**
@@ -167,11 +257,11 @@ class DocumentController extends Controller
             $file_extension = $file->getClientOriginalExtension();
 
             //Renamed File Name
-            $file_name_with_extension = $reference_code.'-'.$version.'.'.$file_extension;
+            $file_name_with_extension = $reference_code.'-'.$category.'-'.$version.'.'.$file_extension;
 //            echo 'File Rename Name: '.$file_name;
 
             //Move Uploaded File
-            $destinationPath = 'storage/uploads';
+            $destinationPath = 'storage/app/public/uploads';
             $file->move($destinationPath,$file_name_with_extension);
 
             $document = new Document();

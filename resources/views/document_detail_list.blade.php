@@ -25,7 +25,7 @@
                                     <th class="text-center">Category</th>
                                     <th class="text-center">Applicability</th>
                                     <th class="text-center">Document Type</th>
-                                    <th class="text-center">Reference No</th>
+                                    <th class="text-center">Reference Code</th>
                                     <th class="text-center">Version</th>
                                     <th class="text-center">Remakrs</th>
                                     <th class="text-center">Action</th>
@@ -43,12 +43,14 @@
                                             <td class="text-center">{{ $d->version }}</td>
                                             <td class="text-center">{{ $d->remarks }}</td>
                                             <td class="text-center">
-                                                <a class="btn btn-sm btn-warning" href="{{ url('/view_document/'.$d->id) }}" target="_blank" title="VIEW">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
                                                 <a class="btn btn-sm btn-primary" href="{{ url('/view_document/'.$d->id) }}" target="_blank" title="VIEW">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
+                                                @if(Auth::user()->access_level == 0)
+                                                <a class="btn btn-sm btn-danger" href="{{ url('/delete_document_by_id/'.$d->id) }}" title="DELETE" onclick="return confirm('Are you sure to delete the document?');">
+                                                    <i class="fa fa-archive"></i>
+                                                </a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -59,4 +61,5 @@
                 </div>
             </div>
         </div>
+    </div>
 @endsection

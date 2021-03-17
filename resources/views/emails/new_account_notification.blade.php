@@ -44,7 +44,7 @@
     </tr>
     <tr>
         <td></td>
-        <td><a href="" class="button_2">Confirmation Link </a></td>
+        <td><a href="{{ url('/new_account_requests') }}" class="button_2">Confirmation Link </a></td>
     </tr>
     </thead>
 </table>
