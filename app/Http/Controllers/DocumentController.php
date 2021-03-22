@@ -106,25 +106,54 @@ class DocumentController extends Controller
 
         $new_row = '';
 
-        foreach ($documents AS $k => $d){
-            $new_row .= '<tr>';
-            $new_row .= '<td class="text-center">'.($k+1).'</td>';
-            $new_row .= '<td class="text-center">'.$d->subject.'</td>';
-            $new_row .= '<td class="text-center">'.$d->category_name.'</td>';
-            $new_row .= '<td class="text-center">'.$d->applicability_name.'</td>';
-            $new_row .= '<td class="text-center">'.$d->document_type_name.'</td>';
-            $new_row .= '<td class="text-center">'.$d->reference_code.'</td>';
-            $new_row .= '<td class="text-center">'.$d->max_version.'</td>';
-            $new_row .= '<td class="text-center">'.$d->remarks.'</td>';
-            $new_row .= '<td class="text-center">
+        if(Auth::user()->access_level == 0){
+            foreach ($documents AS $k => $d){
+                $new_row .= '<tr>';
+                $new_row .= '<td class="text-center">'.($k+1).'</td>';
+                $new_row .= '<td class="text-center">'.$d->subject.'</td>';
+                $new_row .= '<td class="text-center">'.$d->category_name.'</td>';
+                $new_row .= '<td class="text-center">'.$d->applicability_name.'</td>';
+                $new_row .= '<td class="text-center">'.$d->document_type_name.'</td>';
+                $new_row .= '<td class="text-center">'.$d->reference_code.'</td>';
+                $new_row .= '<td class="text-center">'.$d->max_version.'</td>';
+                $new_row .= '<td class="text-center">'.$d->remarks.'</td>';
+                $new_row .= '<td class="text-center">
                             <a class="btn btn-sm btn-primary" href="'.url('/view_document/'.$d->max_id).'" target="_blank" title="VIEW">
                                 <i class="fa fa-eye"></i>
                             </a>
+                            
+                            <a class="btn btn-sm btn-secondary" target="_blank" href="'.url('/document_detail_list/'.$d->document_url).'" title="DETAIL LIST">
+                                <i class="fa fa-download"></i>
+                            </a>
+                            
                             <a class="btn btn-sm btn-warning" href="'.url('/document_detail_list/'.$d->reference_code.'/'.$d->category_id).'" title="DETAIL LIST">
                                 <i class="fa fa-list"></i>
                             </a>
                         </td>';
-            $new_row .= '</tr>';
+                $new_row .= '</tr>';
+            }
+        }else{
+            foreach ($documents AS $k => $d){
+                $new_row .= '<tr>';
+                $new_row .= '<td class="text-center">'.($k+1).'</td>';
+                $new_row .= '<td class="text-center">'.$d->subject.'</td>';
+                $new_row .= '<td class="text-center">'.$d->category_name.'</td>';
+                $new_row .= '<td class="text-center">'.$d->applicability_name.'</td>';
+                $new_row .= '<td class="text-center">'.$d->document_type_name.'</td>';
+                $new_row .= '<td class="text-center">'.$d->reference_code.'</td>';
+                $new_row .= '<td class="text-center">'.$d->max_version.'</td>';
+                $new_row .= '<td class="text-center">'.$d->remarks.'</td>';
+                $new_row .= '<td class="text-center">
+                            <a class="btn btn-sm btn-primary" href="'.url('/view_document/'.$d->max_id).'" target="_blank" title="VIEW">
+                                <i class="fa fa-eye"></i>
+                            </a>
+                            
+                            <a class="btn btn-sm btn-warning" href="'.url('/document_detail_list/'.$d->reference_code.'/'.$d->category_id).'" title="DETAIL LIST">
+                                <i class="fa fa-list"></i>
+                            </a>
+                        </td>';
+                $new_row .= '</tr>';
+            }
         }
 
         return $new_row;
