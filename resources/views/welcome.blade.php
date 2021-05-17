@@ -54,18 +54,16 @@
                 position: relative;
             }
 
-            .top-right {
-                position: absolute;
+            .top-left {
+                position: relative;
                 right: 10px;
                 top: 18px;
             }
 
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
+            .top-right {
+                position: absolute;
+                right: 10px;
+                top: 18px;
             }
 
             .links > a {
@@ -81,29 +79,94 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .nav.navbar-nav.navbar-right li a {
+                color: white;
+            }
         </style>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
+    <nav class="navbar navbar-inverse" style="background-color: #3490dc">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand active" href="{{ url('/') }}" style="color: white">
+                    {{ config('app.name', 'Knowledge-Bank') }}
+                </a>
+            </div>
+            @if (Route::has('login'))
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        @auth
+                            <li><a href="{{ url('/home') }}">Home</a></li>
+                        @else
+                            <li><a href="{{ route('login') }}"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+
+                            @if (Route::has('register'))
+                                <li><a href="{{ route('register') }}"><span class="glyphicon glyphicon-user"></span>Register</a></li>
+                            @endif
+                        @endauth
+                    </ul>
                 </div>
             @endif
+        </div>
+    </nav>
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Knowledge Bank
+        <div class="">
+
+                <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                        <li data-target="#myCarousel" data-slide-to="3"></li>
+                        <li data-target="#myCarousel" data-slide-to="4"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img class="center-block" src="https://www.callcentrehelper.com/images/stories/2020/03/laptop-turns-into-book-760.jpg" width="760" height="440" alt="IMAGE">
+                        </div>
+
+                        <div class="item">
+                            <img class="center-block" src="https://www.kpsol.com/wp-content/uploads/2019/06/KPSOL-glossary-one.jpg" width="760" height="440" alt="IMAGE">
+                        </div>
+
+                        <div class="item">
+                            <img class="center-block" src="https://static.helpjuice.com/helpjuice_production/uploads/upload/image/4752/direct/1597678311691-Explicit%20Knowledge.jpg" width="760" height="440" alt="IMAGE">
+                        </div>
+
+                        <div class="item">
+                            <img class="center-block" src="https://greenlogic.pl/wp-content/uploads/2018/01/0003_transfer-learning.jpg" width="760" height="440" alt="IMAGE">
+                        </div>
+
+                        <div class="item">
+                            <img class="center-block" src="https://www.englishacademyitalia.com/wp-content/uploads/2017/04/Many-people-chatting-about-everything-learning.jpg" width="760" height="440" alt="IMAGE">
+                        </div>
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-            </div>
+
         </div>
         <footer style="width: 100%; text-align: center; font-weight: 700; position: fixed; left: 0; bottom: 0;">
             <p>Copyright © 2021 All Rights Reserved by <a href="http://www.viyellatexgroup.com/" target="_blank">VIYELLATEX GROUP</a></p>
