@@ -109,10 +109,10 @@
                         @auth
                             <li><a href="{{ url('/home') }}">Home</a></li>
                         @else
-                            <li><a href="{{ route('login') }}"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+                            <li><a href="{{ route('login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 
                             @if (Route::has('register'))
-                                <li><a href="{{ route('register') }}"><span class="glyphicon glyphicon-user"></span>Register</a></li>
+                                <li><a href="{{ route('register') }}"><span class="glyphicon glyphicon-user"></span> Register</a></li>
                             @endif
                         @endauth
                     </ul>
