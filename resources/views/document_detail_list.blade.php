@@ -27,6 +27,7 @@
                                     <th class="text-center">Subject</th>
                                     <th class="text-center">Category</th>
                                     <th class="text-center">Applicability</th>
+                                    <th class="text-center">Departments</th>
                                     <th class="text-center">Document Type</th>
                                     <th class="text-center">Reference Code</th>
                                     <th class="text-center">Version</th>
@@ -41,6 +42,7 @@
                                             <td class="text-center">{{ $d->subject }}</td>
                                             <td class="text-center">{{ $d->category_name }}</td>
                                             <td class="text-center">{{ $d->applicability_name }}</td>
+                                            <td class="text-center">{{ $d->document_departments }}</td>
                                             <td class="text-center">{{ $d->document_type_name }}</td>
                                             <td class="text-center">{{ $d->reference_code }}</td>
                                             <td class="text-center">{{ $d->version }}</td>

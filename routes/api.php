@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('categories/{token?}', 'Api\ApiController@getCategories')->name('categories');
+Route::get('applicability_list/{token?}', 'Api\ApiController@getApplicabilityList')->name('applicability_list');
+Route::get('document_types/{token?}', 'Api\ApiController@getDocumentTypes')->name('document_types');
+Route::get('departments/{token?}', 'Api\ApiController@getDepartments')->name('departments');
+Route::get('/get_filtered_documents/{token?}/{subject?}/{category?}/{applicability?}/{document_type?}/{department?}', 'Api\ApiController@getFilteredDocuments')->name('get_filtered_documents');

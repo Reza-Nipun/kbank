@@ -21,59 +21,69 @@
 
                     <div class="card-body mt-2">
                         <div class="row">
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <div class="mb-3">
                                     <label for="subject" class="form-label font-weight-bold">Subject</label>
                                     <input type="text" class="form-control" id="subject" name="subject" />
                                 </div>
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <div class="mb-3">
                                     <label for="category" class="form-label font-weight-bold">Category</label>
                                     <select class="form-control" id="category" name="category">
-                                        <option value="">Select Category</option>
+                                        <option value="">Category</option>
                                         @foreach($categories as $c)
                                             <option value="{{ $c->id }}">{{ $c->category_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <div class="mb-3">
                                     <label for="applicability" class="form-label font-weight-bold">Applicability</label>
                                     <select class="form-control" id="applicability" name="applicability">
-                                        <option value="">Select Applicability</option>
+                                        <option value="">Applicability</option>
                                         @foreach($applicabilities as $a)
                                             <option value="{{ $a->id }}">{{ $a->applicability_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <div class="mb-3">
                                     <label for="document_type" class="form-label font-weight-bold">Document Type</label>
                                     <select class="form-control" id="document_type" name="document_type">
-                                        <option value="">Select Document Type</option>
+                                        <option value="">Document Type</option>
                                         @foreach($document_types as $dt)
                                             <option value="{{ $dt->id }}">{{ $dt->document_type_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <div class="mb-3">
                                     <label for="reference_code" class="form-label font-weight-bold">Reference Code</label>
                                     <select class="form-control" id="reference_code" name="reference_code">
-                                        <option value="">Select Reference Code</option>
+                                        <option value="">Reference Code</option>
                                         @foreach($reference_nos as $reference_no)
                                             <option value="{{ $reference_no->reference_code }}">{{ $reference_no->reference_code }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-sm-3">
+                                <div class="mb-3">
+                                    <label for="departments" class="form-label font-weight-bold">Departments</label>
+                                    <select class="form-control" multiple="multiple" id="departments" name="departments" data-placeholder="Departments...">
+                                        @foreach($departments as $department)
+                                            <option value="{{ $department->id }}">{{ $department->department_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-sm-1">
                                 <div class="mb-3">
-                                    <span class="btn btn-success mt-4" id="search_btn" onclick="getFilteredDocuments()">SEARCH</span>
+                                    <span class="btn btn-primary mt-4" id="search_btn" onclick="getFilteredDocuments()">SEARCH</span>
                                 </div>
                             </div>
                             <div class="col-sm-1">
@@ -91,7 +101,8 @@
                                     <th class="text-center">Subject</th>
                                     <th class="text-center">Category</th>
                                     <th class="text-center">Applicability</th>
-                                    <th class="text-center">Document Type</th>
+                                    <th class="text-center">Departments</th>
+                                    <th class="text-center">Type</th>
                                     <th class="text-center">Reference Code</th>
                                     <th class="text-center">Version</th>
                                     <th class="text-center">Remakrs</th>
@@ -105,6 +116,7 @@
                                             <td class="text-center">{{ $d->subject }}</td>
                                             <td class="text-center">{{ $d->category_name }}</td>
                                             <td class="text-center">{{ $d->applicability_name }}</td>
+                                            <td class="text-center">{{ $d->document_departments }}</td>
                                             <td class="text-center">{{ $d->document_type_name }}</td>
                                             <td class="text-center">{{ $d->reference_code }}</td>
                                             <td class="text-center">{{ $d->max_version }}</td>
@@ -120,7 +132,7 @@
                                                     </a>
                                                 @endif
 
-                                                <a class="btn btn-sm btn-warning" href="{{ url('/document_detail_list/'.$d->reference_code.'/'.$d->category_id) }}" title="DETAIL LIST">
+                                                <a class="btn btn-sm btn-warning" href="{{ url('/document_detail_list/'.$d->reference_code.'/'.$d->category_id) }}" target="_blank" title="DETAIL LIST">
                                                     <i class="fa fa-list"></i>
                                                 </a>
                                             </td>
@@ -144,6 +156,9 @@
             var applicability = $("#applicability").val();
             var document_type = $("#document_type").val();
             var reference_code = $("#reference_code").val();
+            var departments = $("#departments").val();
+
+            console.log(departments)
 
             $("#tbody_id").empty();
 
@@ -152,7 +167,7 @@
             $.ajax({
                 url: "{{ route("get_filtered_documents") }}",
                 type:'POST',
-                data: {_token:"{{csrf_token()}}", subject: subject, category: category, applicability: applicability, document_type: document_type, reference_code: reference_code},
+                data: {_token:"{{csrf_token()}}", subject: subject, category: category, applicability: applicability, document_type: document_type, reference_code: reference_code, departments: departments},
                 dataType: "html",
                 success: function (data) {
 

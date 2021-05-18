@@ -6,7 +6,13 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        {{ __('New Document Type') }}
+                        {{ __('Create Document Type') }}
+
+                        <div class="btn-toolbar float-right">
+                            <a class="btn btn-primary mr-1" href="{{ url('document_type_list') }}" title="Document Types">
+                                <i class="fa fa-list"></i> Document Types
+                            </a>
+                        </div>
                     </div>
 
                     <form action="{{ url('/save_document_type') }}" method="post">

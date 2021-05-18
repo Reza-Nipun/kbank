@@ -44,6 +44,8 @@ Route::post('/save_document_type', 'DocumentTypeController@store')->name('save_d
 Route::get('/edit_document_type/{id}', 'DocumentTypeController@editDocumentType')->name('edit_document_type');
 Route::post('/update_document_type/{id}', 'DocumentTypeController@updateDocumentType')->name('update_document_type');
 
+Route::resource('departments', 'DepartmentController');
+
 Route::get('/documents', 'DocumentController@index')->name('documents');
 Route::get('/view_document/{id}', 'DocumentController@viewDocument')->name('view_document');
 Route::get('/add_document', 'DocumentController@create')->name('add_document');

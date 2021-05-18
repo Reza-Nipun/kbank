@@ -6,7 +6,13 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        {{ __('New Category') }}
+                        {{ __('Create Category') }}
+
+                        <div class="btn-toolbar float-right">
+                            <a class="btn btn-primary mr-1" href="{{ url('category_list') }}" title="Category List">
+                                <i class="fa fa-list"></i> Category List
+                            </a>
+                        </div>
                     </div>
 
                     <form action="{{ url('/save_category') }}" method="post">
@@ -32,13 +38,13 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <label for="task_name" class="form-label">Name <span style="color: red">*</span></label>
+                                        <label for="category_name" class="form-label">Category Name <span style="color: red">*</span></label>
                                         <input class="form-control" type="text" id="category_name" name="category_name" required="required" />
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <label for="task_description" class="form-label">Description </label>
+                                        <label for="category_description" class="form-label">Description </label>
                                         <input class="form-control" type="text" id="category_description" name="category_description" />
                                     </div>
                                 </div>

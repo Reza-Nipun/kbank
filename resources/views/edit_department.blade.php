@@ -6,16 +6,19 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        {{ __('Create Applicability') }}
+                        {{ __('Update Department') }}
 
                         <div class="btn-toolbar float-right">
-                            <a class="btn btn-primary mr-1" href="{{ url('applicability_list') }}" title="Applicability List">
-                                <i class="fa fa-list"></i> Applicability List
+                            <a class="btn btn-primary mr-1" href="{{ url('departments') }}" title="Departments">
+                                <i class="fa fa-list"></i> Departments
                             </a>
                         </div>
                     </div>
 
-                    <form action="{{ url('/save_applicability') }}" method="post">
+                    <form action="{{ route('departments.update', $department->id) }}" method="POST">
+
+                        @method('PATCH')
+
                         {{ csrf_field() }}
 
                         @if(Session::has('message'))
@@ -38,14 +41,14 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <label for="applicability_name" class="form-label">Applicability Name <span style="color: red">*</span></label>
-                                        <input class="form-control" type="text" id="applicability_name" name="applicability_name" required="required" />
+                                        <label for="department_name" class="form-label">Department Name <span style="color: red">*</span></label>
+                                        <input class="form-control" type="text" id="department_name" name="department_name" value="{{ $department->department_name }}" />
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <label for="applicability_description" class="form-label">Description </label>
-                                        <input class="form-control" type="text" id="applicability_description" name="applicability_description" />
+                                        <label for="department_description" class="form-label">Description </label>
+                                        <input class="form-control" type="text" id="department_description" name="department_description" value="{{ $department->department_description }}" />
                                     </div>
                                 </div>
                             </div>
@@ -53,16 +56,16 @@
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <label for="task_assign_to" class="form-label">Status <span style="color: red">*</span></label>
-                                        <select class="form-control" name="status" id="status" required="required">
+                                        <select class="form-control" name="status" id="status">
                                             <option value="">Select Status</option>
-                                            <option value="0">Inactive</option>
-                                            <option value="1">Active</option>
+                                            <option value="0" @if($department->status == 0) selected="selected" @endif>Inactive</option>
+                                            <option value="1" @if($department->status == 1) selected="selected" @endif>Active</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <button type="submit" class="btn btn-success mt-4">SAVE</button>
+                                        <button type="submit" class="btn btn-success mt-4">UPDATE</button>
                                     </div>
                                 </div>
                             </div>

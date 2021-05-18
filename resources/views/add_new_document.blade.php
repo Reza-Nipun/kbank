@@ -6,7 +6,13 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        {{ __('New Document') }}
+                        {{ __('Create Document') }}
+
+                        <div class="btn-toolbar float-right">
+                            <a class="btn btn-primary mr-1" href="{{ url('documents') }}" title="Document List">
+                                <i class="fa fa-list"></i> Document List
+                            </a>
+                        </div>
                     </div>
 
                     <form action="{{ url('/save_document') }}" method="post" enctype="multipart/form-data">
@@ -81,10 +87,22 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mb-3">
+                                        <label for="departments" class="form-label">Department <span style="color: red">*</span></label>
+                                        <select class="form-control" multiple="multiple" name="departments[]" id="departments" required="required" data-placeholder="Departments...">
+                                            @foreach($departments AS $dp)
+                                                <option value="{{ $dp->id }}">{{ $dp->department_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
                                         <label for="remarks" class="form-label">Remarks </label>
                                         <input type="text" class="form-control" name="remarks" id="remarks" />
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mt-4">
                                         <button type="submit" class="btn btn-success">SAVE</button>

@@ -136,6 +136,7 @@
                                                     <a class="dropdown-item" href="{{ url('/applicability_list') }}">Applicability</a>
                                                     <a class="dropdown-item" href="{{ url('/category_list') }}">Category</a>
                                                     <a class="dropdown-item" href="{{ url('/document_type_list') }}">Document Type</a>
+                                                    <a class="dropdown-item" href="{{ url('/departments') }}">Department</a>
                                                 </div>
                                             </li>
                                             @endif
