@@ -23,3 +23,5 @@ Route::get('applicability_list/{token?}', 'Api\ApiController@getApplicabilityLis
 Route::get('document_types/{token?}', 'Api\ApiController@getDocumentTypes')->name('document_types');
 Route::get('departments/{token?}', 'Api\ApiController@getDepartments')->name('departments');
 Route::get('/get_filtered_documents/{token?}/{subject?}/{category?}/{applicability?}/{document_type?}/{department?}', 'Api\ApiController@getFilteredDocuments')->name('get_filtered_documents');
+
+Route::get('/get_document_info_by_id_api/{token?}/{document_id?}', 'Api\ApiController@getDocumentInfoById')->name('get_document_info_by_id_api');

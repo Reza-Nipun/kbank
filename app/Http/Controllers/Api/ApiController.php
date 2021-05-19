@@ -9,6 +9,7 @@ use App\Department;
 use App\DocumentType;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Document;
 
 class ApiController extends Controller
 {
@@ -188,6 +189,24 @@ class ApiController extends Controller
             return response()->json($response_data, 401);
         }
 
+    }
+
+    public function getDocumentInfoById($token=null, $document_id=null){
+        if($token == 'base64:2KaPiyfhZjmv4jBupIucIwetufCu+N3a9K6jGHCc2E=') {
+            $document_info = Document::find($document_id);
+            $file_name = $document_info->document_url;
+
+            $file_url = asset('storage/app/public/uploads/' . $file_name);
+
+            return view('api.view_document', compact('file_url'));
+        }else{
+            $response_data = [
+                'message' => 'Unauthorized',
+                'data' => 'No Data Found'
+            ];
+
+            return response()->json($response_data, 401);
+        }
     }
 
 }

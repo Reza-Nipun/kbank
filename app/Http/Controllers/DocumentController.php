@@ -160,7 +160,7 @@ class DocumentController extends Controller
                                 <i class="fa fa-eye"></i>
                             </a>
                             
-                            <a class="btn btn-sm btn-secondary" target="_blank" href="'.url('/document_detail_list/'.$d->document_url).'" title="DETAIL LIST">
+                            <a class="btn btn-sm btn-secondary" target="_blank" href="'.asset('storage/app/public/uploads/'.$d->document_url).'" title="DETAIL LIST">
                                 <i class="fa fa-download"></i>
                             </a>
                             

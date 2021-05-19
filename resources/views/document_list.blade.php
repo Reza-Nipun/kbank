@@ -105,7 +105,7 @@
                                     <th class="text-center">Type</th>
                                     <th class="text-center">Reference Code</th>
                                     <th class="text-center">Version</th>
-                                    <th class="text-center">Remakrs</th>
+                                    <th class="text-center">Remarks</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                                 </thead>
@@ -157,8 +157,6 @@
             var document_type = $("#document_type").val();
             var reference_code = $("#reference_code").val();
             var departments = $("#departments").val();
-
-            console.log(departments)
 
             $("#tbody_id").empty();
 

@@ -31,7 +31,7 @@
                                     <th class="text-center">Document Type</th>
                                     <th class="text-center">Reference Code</th>
                                     <th class="text-center">Version</th>
-                                    <th class="text-center">Remakrs</th>
+                                    <th class="text-center">Remarks</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                                 </thead>
