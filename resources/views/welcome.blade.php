@@ -91,7 +91,7 @@
     </head>
     <body>
 
-    <nav class="navbar navbar-inverse" style="background-color: #3490dc">
+    <nav class="navbar navbar-inverse" style="background-color: #76ad0e">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -123,37 +123,28 @@
 
         <div class="">
 
-                <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="2000">
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
                         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                         <li data-target="#myCarousel" data-slide-to="1"></li>
                         <li data-target="#myCarousel" data-slide-to="2"></li>
-                        <li data-target="#myCarousel" data-slide-to="3"></li>
-                        <li data-target="#myCarousel" data-slide-to="4"></li>
                     </ol>
 
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner">
                         <div class="item active">
-                            <img class="center-block" src="https://www.callcentrehelper.com/images/stories/2020/03/laptop-turns-into-book-760.jpg" width="760" height="440" alt="IMAGE">
+                            <img class="center-block" src="https://blog.ipleaders.in/wp-content/uploads/2019/04/policy.jpg" width="80%" style="height: 440px !important;" alt="POLICY">
                         </div>
 
                         <div class="item">
-                            <img class="center-block" src="https://www.kpsol.com/wp-content/uploads/2019/06/KPSOL-glossary-one.jpg" width="760" height="440" alt="IMAGE">
+                            <img class="center-block" src="https://www.yourretailcoach.in/wp-content/uploads/2018/04/SOP-Adv2-%E2%80%93-1@2x.png" width="80%" style="height: 440px !important;" alt="SOP">
                         </div>
 
                         <div class="item">
-                            <img class="center-block" src="https://static.helpjuice.com/helpjuice_production/uploads/upload/image/4752/direct/1597678311691-Explicit%20Knowledge.jpg" width="760" height="440" alt="IMAGE">
+                            <img class="center-block" src="https://info.vethanlaw.com/hs-fs/hubfs/Blog_Images/transitional-service-agreement.jpg?width=792&height=528&name=transitional-service-agreement.jpg" width="80%" style="height: 440px !important;" alt="AGREEMENT">
                         </div>
 
-                        <div class="item">
-                            <img class="center-block" src="https://greenlogic.pl/wp-content/uploads/2018/01/0003_transfer-learning.jpg" width="760" height="440" alt="IMAGE">
-                        </div>
-
-                        <div class="item">
-                            <img class="center-block" src="https://www.englishacademyitalia.com/wp-content/uploads/2017/04/Many-people-chatting-about-everything-learning.jpg" width="760" height="440" alt="IMAGE">
-                        </div>
                     </div>
 
                     <!-- Left and right controls -->

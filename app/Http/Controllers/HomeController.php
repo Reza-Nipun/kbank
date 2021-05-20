@@ -25,12 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-//        $new_requests = User::where('status', 2)->get();
-//        $new_requests_count = $new_requests->count();
-//
-//        return view('home', compact('new_requests_count'));
 
-        return redirect('/documents');
+        return view('home');
+
+//        return redirect('/documents');
     }
 
 }

@@ -71,10 +71,11 @@
     <!--Loader End-->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark shadow-sm" style="background-color: #76ad0e">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <h3>{{ config('app.name', 'Knowledge-Bank') }}</h3>
@@ -103,7 +104,7 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                                <nav class="navbar navbar-expand-lg navbar-dark">
                                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                                         <span class="navbar-toggler-icon"></span>
                                     </button>
