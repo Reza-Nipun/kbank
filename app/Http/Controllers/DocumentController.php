@@ -257,6 +257,7 @@ class DocumentController extends Controller
     }
 
     public function deleteDocumentById($id){
+        DocumentDepartment::where('document_id', $id)->delete();
         $document_info = Document::find($id);
         $file_name = $document_info->document_url;
 
