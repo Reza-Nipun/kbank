@@ -89,7 +89,7 @@ class RegisterController extends Controller
         {
             $message
                 ->to($emails)
-                ->subject('New Account Request');
+                ->subject('KBANK - New Account Request');
         });
 
         return $user;

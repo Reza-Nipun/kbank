@@ -31,7 +31,7 @@
 </head>
 <body>
 <p>Dear Concern ,</p>
-<p>This is a new account creation request.</p>
+<p>This is a new account creation request for KBANK - Knowledge Bank System.</p>
 <table>
     <thead>
     <tr>
